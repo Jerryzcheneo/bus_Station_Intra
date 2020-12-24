@@ -1,31 +1,34 @@
-let people = 0
+bluetooth.onBluetoothConnected(function () {
+    start_sending = 1
+})
+bluetooth.onBluetoothDisconnected(function () {
+    start_sending = 0
+})
+let noofperson = 0
+let start_sending = 0
+basic.showString("S")
+basic.pause(200)
+bluetooth.startUartService()
+start_sending = 0
 basic.forever(function () {
-    people = 0
+    noofperson = 0
     if (pins.analogReadPin(AnalogPin.P0) < 200) {
-        people += 1
-        if (pins.analogReadPin(AnalogPin.P1) < 200) {
-            people += 1
-            basic.showLeds(`
-                . . . . .
-                . # . . #
-                # . # . #
-                # . . # #
-                . # . . #
-                `)
-            basic.pause(500)
-        } else {
-            basic.showLeds(`
-                . . . . .
-                . . . . #
-                # # # # #
-                . # . . #
-                . . . . .
-                `)
-            basic.pause(500)
-        }
+        noofperson += 1
+    }
+    if (pins.analogReadPin(AnalogPin.P1) < 200) {
+        noofperson += 1
+    }
+    if (noofperson == 2) {
+        basic.showLeds(`
+            . . . . .
+            . # . . #
+            # . # . #
+            # . . # #
+            . # . . #
+            `)
+        basic.pause(200)
     } else {
-        if (pins.analogReadPin(AnalogPin.P1) < 200) {
-            people += 1
+        if (noofperson == 1) {
             basic.showLeds(`
                 . . . . .
                 . . . . #
@@ -33,7 +36,7 @@ basic.forever(function () {
                 . # . . #
                 . . . . .
                 `)
-            basic.pause(500)
+            basic.pause(200)
         } else {
             basic.showLeds(`
                 . . . . .
@@ -42,7 +45,7 @@ basic.forever(function () {
                 # . . . #
                 . # # # .
                 `)
-            basic.pause(500)
+            basic.pause(200)
         }
     }
 })
