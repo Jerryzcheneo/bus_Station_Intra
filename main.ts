@@ -3,6 +3,8 @@ bluetooth.onBluetoothConnected(function () {
 })
 bluetooth.onBluetoothDisconnected(function () {
     start_sending = 0
+    basic.showIcon(IconNames.No)
+    basic.pause(200)
 })
 let noofperson = 0
 let start_sending = 0
