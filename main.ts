@@ -20,6 +20,9 @@ basic.forever(function () {
     if (pins.analogReadPin(AnalogPin.P1) < 200) {
         noofperson += 1
     }
+    if (start_sending == 1) {
+        bluetooth.uartWriteNumber(noofperson)
+    }
     if (noofperson == 2) {
         basic.showLeds(`
             . . . . .
